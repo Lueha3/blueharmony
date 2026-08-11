@@ -1,139 +1,153 @@
-# Seedance 2.5 — 레퍼런스 영상 스타일 이식 프롬프트
+# Seedance 2.5 — Style Transfer Prompt from Reference Reel
 
-레퍼런스 영상(`holydrip.club` 스타일링 릴스)의 무드/톤/스타일을 분석하고,
-제공된 인물 사진(한국인 남성, 170cm / 65kg)에 이식하기 위한 Seedance 2.5 프롬프트.
+Analysis of the reference reel (a `holydrip.club` styling reel) — its mood, tone,
+and style — mapped onto the supplied model photos (Korean man, 170 cm / 65 kg) as a
+Seedance 2.5 prompt set.
 
 ---
 
-## 1. 레퍼런스 영상 분석
+## 1. Reference Video Analysis
 
-### 1-1. 기술 스펙
+### 1-1. Technical Spec
 
-| 항목 | 값 |
+| Item | Value |
 |---|---|
-| 해상도 | 884 × 1920 (세로 9:16) |
-| 프레임레이트 | 30 fps |
-| 길이 | 63.0초 |
-| 코덱 | HEVC / AAC 44.1kHz 스테레오 |
-| 오디오 | 62.3초까지 무음 구간 없음 → 끊김 없는 내레이션 + 비트 |
+| Resolution | 884 × 1920 (vertical 9:16) |
+| Frame rate | 30 fps |
+| Duration | 63.0s |
+| Codec | HEVC / AAC 44.1kHz stereo |
+| Audio | No silent gaps up to 62.3s → continuous narration + beat |
 
-### 1-2. 두 개의 레이어
+### 1-2. Two Layers
 
-영상은 **두 겹**으로 되어 있다. 이걸 구분해야 프롬프트가 산으로 가지 않는다.
+The video is made of **two layers**. Separating them is essential, or the prompt
+goes off the rails.
 
-**레이어 A — 화면녹화 래퍼 (재현 대상 아님)**
-아이폰으로 인스타그램 릴스를 화면녹화한 껍데기.
-상태바(9:45, 배터리 100), 다이나믹 아일랜드의 빨간 녹화점, "릴스 / 친구" 탭,
-우측 좋아요·댓글(1,315)·공유(6,999) 아이콘, 하단 네비게이션 바,
-`holydrip.club` 계정 + "The CEO has been cooking with his looks ✨" 캡션.
+**Layer A — screen-recording wrapper (not a reproduction target)**
+An iPhone screen recording of an Instagram Reel.
+Status bar (9:45, 100% battery), the red Dynamic Island recording dot, the
+"Reels / Friends" tab, the right-side like/comment(1,315)/share(6,999) icons, the
+bottom navigation bar, the `holydrip.club` account and the caption
+"The CEO has been cooking with his looks ✨".
 
-→ **이건 AI로 생성하면 안 된다.** 텍스트/아이콘이 깨진다.
-   필요하면 편집 툴에서 실제 UI 목업을 얹는 게 정답.
+→ **This must not be AI-generated.** Text and icons will break.
+   If needed, composite a real UI mockup on top in an editing tool instead.
 
-**레이어 B — 실제 릴스 콘텐츠 (재현 대상)**
-플러스사이즈 남성을 모델로 한 **챕터형 스타일링 튜토리얼**.
+**Layer B — the actual reel content (the reproduction target)**
+A **chapter-based styling tutorial** featuring a plus-size male model.
 `#1 FABRICS → #2 COLLARS → #3 LAYERING → #4 SHOES → #5 EYEWEAR`
 
-### 1-3. 무드 / 톤 / 스타일
+### 1-3. Mood / Tone / Style
 
-**공간**
-- 무한 화이트 사이클로라마(seamless white). 소품·가구·벽 일절 없음
-- 코너로 갈수록 아주 옅은 쿨그레이 그라데이션
-- 발밑에만 부드러운 컨택트 섀도우 → "떠 있지 않게" 잡아주는 유일한 요소
+**Space**
+- Seamless infinite white cyclorama. Zero props, furniture, or walls
+- A very faint cool-grey gradient toward the corners
+- One soft contact shadow under the feet — the only thing keeping him from
+  looking like he's floating
 
-**조명**
-- 하이키(high-key). 정면 대형 소프트박스 + 균일한 필
-- 얼굴에 그림자가 거의 없음, 피부 톤 평탄
-- 안경 렌즈에 작고 부드러운 캐치라이트
-- 커머스 룩북 / 이커머스 상세페이지 촬영 조명 그 자체
+**Lighting**
+- High-key. Large frontal softbox plus even fill
+- Almost no shadow on the face, flat even skin tone
+- A small soft catchlight on the glasses lenses
+- Exactly the lighting of a commerce lookbook / e-commerce product shoot
 
-**카메라**
-- 삼각대 고정, 핸드헬드 흔들림 0
-- 아이레벨, 정면 정대(dead-on), 50mm 계열의 왜곡 없는 화각
-- 기본은 **전신 풀샷**(머리 위 여백 넉넉)
-- 간헐적으로 흉상 클로즈업 / 얼굴 클로즈업 / 하체 디테일 컷(바지+신발)
-- 움직임은 아주 느린 푸시인 정도
+**Camera**
+- Locked-off tripod, zero handheld shake
+- Eye-level, dead-on frontal framing, an undistorted ~50 mm field of view
+- Default is a **full-body wide shot** (generous headroom)
+- Intercut with bust close-ups, face close-ups, and lower-body detail shots
+  (pants + shoes)
+- Movement is limited to a very slow push-in
 
-**편집**
-- 비트에 붙는 하드컷. 룩 하나당 **1~2초** 유지
-- 시그니처는 **워드로브 텔레포트** — 포즈·프레이밍은 그대로, 옷만 순간 교체되는 매치컷
-- 트랜지션 효과(디졸브, 와이프) 없음. 무조건 컷
+**Editing**
+- Hard cuts on the beat. Each look holds for **1-2 seconds**
+- The signature move is the **wardrobe teleport** — a match cut where pose and
+  framing stay fixed and only the clothes swap instantly
+- No transition effects (dissolves, wipes). Cuts only
 
-**그래픽 (이 영상의 진짜 정체성)**
-- 대문자 지오메트릭 산세리프. 순백 또는 차콜만 사용
-- 챕터 타이틀: 큰 대문자 + 그 위에 작게 자간 벌린 `HACK 4`
-- **알약형 흰 배지 + 빨간 ❌ / 초록 ✅**
+**Graphics (the video's real identity)**
+- Uppercase geometric sans-serif. Pure white or charcoal only
+- Chapter titles: a large uppercase word with a small tracked-out `HACK 4` above it
+- **Pill-shaped white badges with a red ❌ / green ✅**
   `❌ SLIM` `✅ CHUNKY SHOES` `❌ THIN FABRIC` `✅ CREW NECK` `✅ WIDE LAPELS`
-- **검정 점선 다이어그램** — 어깨 라인, 얼굴 윤곽 타원, 기장 표시, `longer`, `stronger base`
-- **우측 세로 스와치 피커** — `COTTON / DENIM / TWILL / LINEN / CO-ORD` + 커서가 클릭
-- 인트로: 흰 라운드 카드 스택 메뉴 (썸네일 + 챕터명 + `#1`~`#5`)
+- **Black dashed-line diagrams** — shoulder line, face-outline oval, length
+  markers, `longer`, `stronger base`
+- **A vertical swatch picker on the right edge** —
+  `COTTON / DENIM / TWILL / LINEN / CO-ORD` with a cursor clicking through them
+- Intro: a stack of white rounded cards (thumbnail + chapter name + `#1`–`#5`)
 
-**컬러 그레이딩**
-- 밝고 중성적. 낮은 콘트라스트, 화이트 밸런스 정확
-- 배경·그래픽은 완전 무채색 → **채도는 오직 옷에만** 존재
-- 디지털 선명함. 필름 그레인 없음
+**Color grade**
+- Bright and neutral. Low contrast, accurate white balance
+- Background and graphics are fully desaturated → **saturation lives only in
+  the clothing**
+- Crisp and digital. No film grain
 
-**전체 느낌 한 줄**
-> 프리미엄 앱 온보딩 화면 같은 패션 튜토리얼. 유머 없이 담백하고,
-> 자신감 있게 가르치는 톤. "before → after 글로우업"의 소프트셀.
+**Overall feel, in one line**
+> A fashion tutorial that looks like a premium app onboarding screen. Deadpan,
+> no humor, taught with quiet confidence. A soft-sell "before → after glow-up."
 
 ---
 
-## 2. 모델 적용
+## 2. Applying the Model
 
-### 2-1. 사진 속 인물
+### 2-1. The Person in the Photos
 
-- 한국인 남성, 20대 초중반
-- 170cm / 65kg → **마르고 균형 잡힌 체형**. 어깨 좁은 편, 군살 없음
-- 검은 머리, 투블럭 컷 + 옆으로 넘긴 소프트 앞머리, 윗머리에 살짝 웨이브 볼륨
-- **두꺼운 검정 아세테이트 라운드(보스턴) 안경** — 인상의 핵심
-- 밝은 피부, 깔끔한 턱선, 오똑한 코, 작고 도톰한 입술
-- 표정은 차분한 무표정 ~ 옅은 미소
+- Korean man, early-to-mid twenties
+- 170 cm / 65 kg → **lean, balanced build**. Narrow-ish shoulders, no excess
+- Black hair, two-block cut with a soft side-swept fringe, slight wave and
+  volume on top
+- **Thick black acetate round (Boston) glasses** — the defining feature
+- Fair skin, clean jawline, straight nose, small full lips
+- Expression ranges from calm neutral to a faint smile
 
-### 2-2. ⚠️ 콘텐츠 논리를 뒤집어야 하는 이유
+### 2-2. ⚠️ Why the Content Logic Has to Flip
 
-원본 모델은 플러스사이즈다. 그래서 챕터 주제가 전부
-**"체형을 커버하는 법"** — 얇은 원단, 크루넥, 청키 슈즈로 하체 안정화.
+The original model is plus-size, so every chapter is about
+**"how to dress around your build"** — thin fabrics, crew necks, chunky shoes to
+stabilize the lower body.
 
-170cm / 65kg 슬림 체형에 그 주제를 그대로 얹으면 논리가 안 맞는다.
-챕터를 **"슬림한 체형에 볼륨과 비율을 만드는 법"**으로 뒤집는 게 맞다.
+Applying that same logic to a slim 170 cm / 65 kg build doesn't hold up.
+The chapters should flip to **"how to build volume and proportion on a slim
+build."**
 
-| 원본 챕터 | 이식 챕터 | 논리 |
+| Original chapter | Ported chapter | Logic |
 |---|---|---|
-| #1 FABRICS (얇은 원단) | **#1 PROPORTION** | 무릎에서 딱 끊기는 반바지 → 정강이 노출로 다리 길이 확보 |
-| #2 COLLARS (작은 카라 ❌) | **#2 VOLUME** | 오버핏 상의로 좁은 어깨 보완 |
-| #3 LAYERING | **#3 LAYERING** | 그레이 패딩으로 상체 두께 만들기 |
-| #4 SHOES (청키) | **#4 SHOES** | 청키 스니커즈로 하체 무게중심 + 키 보정 |
-| #5 EYEWEAR | **#5 EYEWEAR** | 라운드 안경 유지, 프레임 두께 비교 |
+| #1 FABRICS (thin fabric) | **#1 PROPORTION** | Shorts that cut off cleanly at the knee → bare shin reads longer legs |
+| #2 COLLARS (small collar ❌) | **#2 VOLUME** | An oversized top compensates for narrow shoulders |
+| #3 LAYERING | **#3 LAYERING** | A grey puffer builds upper-body bulk |
+| #4 SHOES (chunky) | **#4 SHOES** | Chunky sneakers add lower-body weight and height |
+| #5 EYEWEAR | **#5 EYEWEAR** | Keep the round glasses, compare frame thickness |
 
-### 2-3. 지정 착장
+### 2-3. The Specified Outfit
 
-사용자가 지정한 실제 제품 3종. 프롬프트에는 브랜드명 없이 **형태·소재·색으로만**
-기술했다. 생성 모델에 브랜드명을 넣으면 로고를 지어내서 프레임에 박아버린다.
+Three real products the user specified. The prompt describes them by
+**shape, material and color only, with no brand name** — feeding a brand name to
+the generation model makes it invent a logo and stamp it onto the frame.
 
-| 아이템 | 프롬프트에 들어간 기술 |
+| Item | Prompt description |
 |---|---|
-| **그레이 와이드 반바지** (난데 숏팬츠) | 헤더 멜란지 라이트 그레이 기모 스웻 원단, 볼륨 있는 A라인, 앞면 중앙 프레스 주름, 밴딩 허리 + 그레이 드로스트링, 사선 사이드 포켓, 밑단이 무릎에서 딱 끝남 |
-| **청키 스니커즈** | 오프화이트 크림 레더 어퍼, 옆면 페일 그레이 웨이브 오버레이 패널, 화이트 라운드 레이스, 아주 높은 레이어드 러그 midsole |
-| **라이트 다운자켓** (블랙야크 스톤마스터) | 페일 아이스 그레이 실버, 광택 있는 립스탑 나일론, 몸판·소매 가로 퀼팅 배플, 풀집 그레이 지퍼, 부푼 후드에 검정 안감이 보임, 지퍼 핸드포켓 2개, 벌키하지 않고 슬림 |
+| **Grey wide-leg shorts** (Nande shorts) | Heather marled light grey brushed sweat fabric, voluminous A-line cut, a pressed centre crease down the front, elastic waistband with a grey drawstring, slanted side pockets, hem ending right at the knee |
+| **Chunky sneakers** | Off-white cream leather upper, pale grey wavy overlay panels on the sides, white round laces, a very tall layered lugged midsole |
+| **Light down jacket** (BlackYak Stonemaster) | Pale ice-grey silver, glossy ripstop nylon, horizontal quilted baffle channels on body and sleeves, full-length grey zip, puffed hood with visible black lining, two zippered hand pockets, slim rather than bulky |
 
-부속으로 **오버핏 화이트 크루넥 티**(드롭숄더, 밑단 골반)와
-**화이트 골지 크루삭스**(종아리 중간까지)가 함께 들어간다.
+Paired with an **oversized white crew-neck tee** (dropped shoulder, hip-length
+hem) and **white ribbed crew socks** (pulled to mid-calf).
 
-> 반바지 + 패딩 조합은 의도된 것으로 처리했다. 계절 충돌이 아니라
-> 한국 스트릿에서 흔한 레이어링이라 그대로 살렸다.
+> The shorts + puffer combo was kept as intentional. It's not a seasonal clash —
+> it's a common layering choice in Korean streetwear, so it was left as-is.
 
 ---
 
-## 3. Seedance 2.5 프롬프트
+## 3. Seedance 2.5 Prompts
 
-> **길이 제약**: Seedance 2.5는 1회 호출 최대 30초.
-> 원본이 63초이므로 **세그먼트로 나눠 생성 후 편집 툴에서 이어붙이는 것**을 권장.
-> 아래는 8초 × 5 세그먼트 구성.
+> **Length constraint**: Seedance 2.5 caps at 30 seconds per call.
+> The source is 63 seconds, so generating **segments and stitching them in an
+> editing tool** is recommended. Below is an 8-second × 5-segment structure.
 
-### 공통 앵커 블록
+### Shared Anchor Block
 
-모든 세그먼트 프롬프트 앞에 이 블록을 붙인다. 인물 일관성의 핵심.
+Prepend this block to every segment prompt. It's the backbone of subject
+consistency.
 
 ```
 SUBJECT ANCHOR — keep identical in every shot:
@@ -175,7 +189,7 @@ grain, no vignette, no lens flare. Vertical 9:16 e-commerce lookbook aesthetic.
 
 ---
 
-### SEG 1 — INTRO / 메뉴 (8초)
+### SEG 1 — INTRO / Menu (8s)
 
 ```
 [SUBJECT ANCHOR] [STYLE ANCHOR]
@@ -201,7 +215,7 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 
 ---
 
-### SEG 2 — PROPORTION / 하이웨이스트 비교 (8초)
+### SEG 2 — PROPORTION / High-waist Comparison (8s)
 
 ```
 [SUBJECT ANCHOR] [STYLE ANCHOR]
@@ -230,7 +244,7 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 
 ---
 
-### SEG 3 — VOLUME / 오버핏 (8초)
+### SEG 3 — VOLUME / Oversized Fit (8s)
 
 ```
 [SUBJECT ANCHOR] [STYLE ANCHOR]
@@ -256,7 +270,7 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 
 ---
 
-### SEG 4 — LAYERING / 스와치 UI (8초)
+### SEG 4 — LAYERING / Swatch UI (8s)
 
 ```
 [SUBJECT ANCHOR] [STYLE ANCHOR]
@@ -285,7 +299,7 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 
 ---
 
-### SEG 5 — SHOES + EYEWEAR (8초)
+### SEG 5 — SHOES + EYEWEAR (8s)
 
 ```
 [SUBJECT ANCHOR] [STYLE ANCHOR]
@@ -312,27 +326,29 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 
 ---
 
-### 단일 호출 버전 (15초, 빠른 검증용)
+### Single-call version (15s, for quick validation)
 
-세그먼트 5개가 부담스러우면 이거 하나로 톤부터 확인.
-앵커가 인라인으로 합쳐진 **복붙 가능한 완성본은 4-1 섹션**에 있다.
-구성은 아래와 같다.
+If five segments feel like too much, use this one to check the tone first.
+The **copy-paste-ready version, with the anchors merged inline, is in section
+4-1**. Its shot structure:
 
-| 컷 | 시간 | 내용 |
+| Shot | Time | Content |
 |---|---|---|
-| 1 | 0-4s | 전신 풀샷. 히어로 착장(오버핏 화이트 티 + 그레이 와이드 반바지 + 화이트 양말 + 청키 스니커즈), 재킷 없음 |
-| 2 | 4-8s | 하드컷 워드로브 텔레포트. 포즈·프레이밍 그대로, **그레이 패딩만 위에 입혀짐** |
-| 3 | 8-11s | 무릎 아래 디테일컷. 반바지 밑단, 맨 정강이, 화이트 크루삭스, 청키 밑창 |
-| 4 | 11-15s | 얼굴 클로즈업. 아주 느린 푸시인, 마지막 비트에 옅은 미소 |
+| 1 | 0-4s | Full-body wide shot. Hero outfit (oversized white tee + grey wide-leg shorts + white socks + chunky sneakers), no jacket |
+| 2 | 4-8s | Hard-cut wardrobe teleport. Pose and framing unchanged, **only the grey puffer is added** |
+| 3 | 8-11s | Below-the-knee detail shot. Shorts hem, bare shin, white crew socks, chunky sole |
+| 4 | 11-15s | Face close-up. Very slow push-in, a faint smile on the final beat |
 
 ---
 
-### 클린 플레이트 버전 (그래픽 없음 — 권장)
+### Clean-plate version (no graphics — recommended)
 
-AI의 텍스트 렌더링은 신뢰도가 낮다. **그래픽 없이 깨끗하게 뽑고 자막·배지·점선은
-편집 툴(After Effects / CapCut)에서 얹는 것**이 결과물 품질이 가장 높다.
+AI text rendering is unreliable. **Generating a clean plate with no graphics, then
+adding captions/badges/dashed lines in an editing tool** (After Effects / CapCut)
+gives the highest-quality result.
 
-위 프롬프트에서 `Graphics:` 문단을 통째로 삭제하고 마지막 줄을 아래로 교체:
+Delete the entire `Graphics:` paragraph from the prompts above and replace the
+final line with:
 
 ```
 Completely clean frame: no text, no captions, no badges, no logos, no watermark,
@@ -341,12 +357,12 @@ no user interface elements of any kind.
 
 ---
 
-## 4. 호출 파라미터
+## 4. Call Parameters
 
 ```json
 {
   "model": "seedance_2_5",
-  "prompt": "<위 프롬프트>",
+  "prompt": "<prompt above>",
   "params": {
     "mode": "omni_reference",
     "aspect_ratio": "9:16",
@@ -354,60 +370,62 @@ no user interface elements of any kind.
     "resolution": "720p",
     "generate_audio": false,
     "medias": [
-      { "role": "image_references", "value": "<사진1 media_id>" },
-      { "role": "image_references", "value": "<사진2 media_id>" },
-      { "role": "image_references", "value": "<사진3 media_id>" }
+      { "role": "image_references", "value": "<photo1 media_id>" },
+      { "role": "image_references", "value": "<photo2 media_id>" },
+      { "role": "image_references", "value": "<photo3 media_id>" }
     ]
   }
 }
 ```
 
-**설정 근거**
+**Rationale for each setting**
 
-| 파라미터 | 값 | 이유 |
+| Parameter | Value | Reason |
 |---|---|---|
-| `mode` | `omni_reference` | 사진의 얼굴 아이덴티티를 물고 가야 함 |
-| `aspect_ratio` | `9:16` | 원본 884×1920과 동일한 세로 릴스 |
-| `duration` | `8` | 세그먼트 단위. 최대 30초까지 가능 |
-| `resolution` | `720p` | Seedance 2.5 최대치 (480p/720p만 지원) |
-| `generate_audio` | `false` | 원본은 내레이션+비트 구성. 오디오는 따로 붙이는 게 통제 가능 |
-| `medias` | 정면·측면 사진 3장 | 각도가 다양할수록 아이덴티티 안정 |
+| `mode` | `omni_reference` | Needs to carry the facial identity from the photos |
+| `aspect_ratio` | `9:16` | Matches the source's vertical reel, 884×1920 |
+| `duration` | `8` | Per segment. Up to 30s is allowed |
+| `resolution` | `720p` | Seedance 2.5's ceiling (only 480p/720p supported) |
+| `generate_audio` | `false` | The source uses narration + a beat; better to add audio separately with full control |
+| `medias` | 3 front/side photos | More angles keep identity more stable |
 
-**주의**
-- Seedance 2.5는 **720p가 상한**이다. 원본(884×1920)보다 낮다.
-  더 높은 해상도가 필요하면 `seedance_2_0`(std 모드, 최대 4K) 또는
-  `minimax_h3`(2K)를 검토하거나, 생성 후 `upscale_video`로 2K/4K 업스케일.
-- 워드로브 텔레포트는 한 세그먼트에 **2~3회까지**가 안전하다.
-  그 이상 넣으면 얼굴이 흔들린다.
-- 프레임당 온스크린 텍스트는 **한 덩어리, 대문자, 2단어 이내**로 유지.
+**Cautions**
+- Seedance 2.5 **caps at 720p**, lower than the source (884×1920).
+  For higher resolution, consider `seedance_2_0` (std mode, up to 4K) or
+  `minimax_h3` (2K), or run `upscale_video` after generation.
+- Wardrobe teleports are safe up to **2-3 per segment**.
+  Push past that and the face starts to drift.
+- Keep on-screen text per frame to **one block, uppercase, two words or fewer**.
 
 ---
 
-## 4-1. 힉스필드 웹에서 직접 실행하기 (복붙용)
+## 4-1. Running It Directly on the Higgsfield Website (copy-paste)
 
-### 순서
+### Steps
 
-1. **higgsfield.ai** 로그인 → 영상 생성(Video / Generate) 화면으로 이동
-2. **모델을 `Seedance 2.5`로 선택**
-   - 모델 목록에 Seedance 2.0 / 2.0 Mini도 같이 보인다. **2.5**를 골라야 함
-3. **레퍼런스 이미지 업로드** — 브라우저 UI를 잘라낸 사진 3장을 전부 올린다
-   - 역할(role)을 고르는 옵션이 있으면 **`image_references`** 로 지정
-   - `start_image`로 잡히면 안 된다. 그러면 사진 배경(복도·강의실)이 첫 프레임에 그대로 박힌다
-4. **모드를 `omni_reference`** 로 설정 (레퍼런스를 올리면 보통 자동 전환됨)
-5. 아래 설정값 입력 후 프롬프트 붙여넣기
+1. Log into **higgsfield.ai** → go to Video / Generate
+2. **Select the `Seedance 2.5` model**
+   - Seedance 2.0 / 2.0 Mini also appear in the model list. Make sure to pick **2.5**
+3. **Upload the reference images** — all 3 photos with the browser chrome cropped out
+   - If there's a role selector, set it to **`image_references`**
+   - It must NOT be assigned to `start_image` — that would bake the photo's
+     background (a hallway/classroom) straight into the first frame
+4. **Set mode to `omni_reference`** (usually switches automatically once
+   references are uploaded)
+5. Enter the settings below, then paste the prompt
 
-### 설정값
+### Settings
 
-| 항목 | 값 |
+| Field | Value |
 |---|---|
 | Model | `Seedance 2.5` |
 | Mode | `omni_reference` |
 | Aspect ratio | `9:16` |
 | Duration | `15` |
-| Resolution | `720p` (2.5의 상한) |
-| Generate audio | **끄기** |
+| Resolution | `720p` (2.5's ceiling) |
+| Generate audio | **off** |
 
-### 프롬프트 (전체 복사)
+### Prompt (copy the whole block)
 
 ```
 A slim young Korean man in his early twenties, matching the reference photos
@@ -467,37 +485,44 @@ Completely clean frame: no text, no captions, no badges, no logos, no watermark,
 no brand marks on any garment, no user interface elements of any kind.
 ```
 
-### 결과 확인 포인트
+### What to check in the result
 
-이 15초로 판단할 것은 다섯 가지.
+This 15-second clip is for judging five things.
 
-1. **얼굴이 사진과 같은 사람인가** — 특히 4번 샷 클로즈업
-2. **배경이 순백 무한대로 깔렸는가** — 사진 속 복도/강의실이 새어나오면 실패
-3. **2번 컷에서 포즈가 유지된 채 패딩만 입혀지는가** — 워드로브 텔레포트가 이 영상의 핵심
-4. **착장이 지정한 대로 나왔는가** — 반바지 밑단이 무릎에서 끊기는지, 스니커즈
-   밑창이 충분히 두꺼운지, 패딩이 가로 퀼팅인지
-5. **조명이 하이키로 평탄한가** — 얼굴에 그림자가 지면 톤이 달라진다
+1. **Is the face the same person as the photos?** — check shot 4's close-up
+   especially
+2. **Is the background a seamless white infinity?** — a leak of the photo's
+   hallway/classroom means failure
+3. **Does the pose hold through the cut while only the puffer gets added?** —
+   the wardrobe teleport is the core of this video
+4. **Did the outfit come out as specified?** — does the shorts hem cut off at
+   the knee, is the sneaker sole thick enough, is the puffer's quilting
+   horizontal
+5. **Is the lighting flat and high-key?** — a shadow on the face means the tone
+   is off
 
-| 실패 지점 | 대응 |
+| Failure point | Fix |
 |---|---|
-| 1번 | 레퍼런스 사진을 얼굴 위주로 더 타이트하게 크롭해서 재업로드 |
-| 2번 | 사진이 `start_image`로 들어갔을 가능성이 높다. role 확인 |
-| 3번 | 컷을 2개로 줄이고 duration을 10초로 |
-| 4번 | 해당 아이템 제품컷을 `image_references`에 **추가로** 올린다. 인물 사진과 섞여 얼굴이 흔들리면, 착장 전용으로 따로 한 번 더 돌려서 좋은 쪽을 채택 |
+| #1 | Crop the reference photos tighter around the face and re-upload |
+| #2 | The photo was likely assigned to `start_image`. Check the role |
+| #3 | Cut down to 2 shots and set duration to 10s |
+| #4 | Upload a product shot of that item **in addition**, into `image_references`. If mixing it with the portrait photos destabilizes the face, run a separate outfit-only pass and pick the better result |
 
 ---
 
-## 5. 확인 필요한 점
+## 5. Points to Confirm
 
-1. **가로 스크린샷(옷장 배경 데님 셔츠 남성)의 용도**
-   업로드된 영상과는 다른 장면이다. 세로 사진 3장을 모델 레퍼런스로 확정하고
-   프롬프트를 짰다. 만약 저 옷장 세팅(화이트 행어에 옷이 걸린 워크인 클로짓)도
-   재현 대상이면 `STYLE ANCHOR`의 화이트 사이클로라마를 옷장으로 교체하면 된다.
+1. **What the landscape screenshot is for (man in a denim shirt, closet background)**
+   It's a different scene from the uploaded video. The prompts above lock in the
+   three vertical photos as the model reference. If that closet setting (a
+   walk-in closet with clothes on white hangers) should also be reproduced,
+   swap the white cyclorama in `STYLE ANCHOR` for that closet.
 
-2. **인스타 UI 재현 여부**
-   화면녹화 껍데기까지 원한다면 AI 생성이 아니라 편집 툴에서 실제 UI 목업을
-   얹는 방식이 맞다.
+2. **Whether to reproduce the Instagram UI**
+   If the screen-recording wrapper is also wanted, the right approach is a real
+   UI mockup composited in an editing tool, not AI generation.
 
-3. **오디오**
-   원본은 63초 내내 끊기지 않는 내레이션 + 비트. 한국어 내레이션 대본이 필요하면
-   챕터 구성에 맞춰 별도로 작성 가능.
+3. **Audio**
+   The source has continuous narration + a beat for the full 63 seconds. If a
+   Korean narration script is needed, it can be written separately to match the
+   chapter structure.
