@@ -100,11 +100,28 @@
 
 | 원본 챕터 | 이식 챕터 | 논리 |
 |---|---|---|
-| #1 FABRICS (얇은 원단) | **#1 PROPORTION** | 하이웨이스트 + 상의 짧게 → 다리 길이 확보 |
+| #1 FABRICS (얇은 원단) | **#1 PROPORTION** | 무릎에서 딱 끊기는 반바지 → 정강이 노출로 다리 길이 확보 |
 | #2 COLLARS (작은 카라 ❌) | **#2 VOLUME** | 오버핏 상의로 좁은 어깨 보완 |
-| #3 LAYERING | **#3 LAYERING** | 레이어로 상체 두께 만들기 (그대로 유지) |
-| #4 SHOES (청키) | **#4 SHOES** | 볼륨 스니커즈 / 굽 있는 부츠로 키 보정 |
+| #3 LAYERING | **#3 LAYERING** | 그레이 패딩으로 상체 두께 만들기 |
+| #4 SHOES (청키) | **#4 SHOES** | 청키 스니커즈로 하체 무게중심 + 키 보정 |
 | #5 EYEWEAR | **#5 EYEWEAR** | 라운드 안경 유지, 프레임 두께 비교 |
+
+### 2-3. 지정 착장
+
+사용자가 지정한 실제 제품 3종. 프롬프트에는 브랜드명 없이 **형태·소재·색으로만**
+기술했다. 생성 모델에 브랜드명을 넣으면 로고를 지어내서 프레임에 박아버린다.
+
+| 아이템 | 프롬프트에 들어간 기술 |
+|---|---|
+| **그레이 와이드 반바지** (난데 숏팬츠) | 헤더 멜란지 라이트 그레이 기모 스웻 원단, 볼륨 있는 A라인, 앞면 중앙 프레스 주름, 밴딩 허리 + 그레이 드로스트링, 사선 사이드 포켓, 밑단이 무릎에서 딱 끝남 |
+| **청키 스니커즈** | 오프화이트 크림 레더 어퍼, 옆면 페일 그레이 웨이브 오버레이 패널, 화이트 라운드 레이스, 아주 높은 레이어드 러그 midsole |
+| **라이트 다운자켓** (블랙야크 스톤마스터) | 페일 아이스 그레이 실버, 광택 있는 립스탑 나일론, 몸판·소매 가로 퀼팅 배플, 풀집 그레이 지퍼, 부푼 후드에 검정 안감이 보임, 지퍼 핸드포켓 2개, 벌키하지 않고 슬림 |
+
+부속으로 **오버핏 화이트 크루넥 티**(드롭숄더, 밑단 골반)와
+**화이트 골지 크루삭스**(종아리 중간까지)가 함께 들어간다.
+
+> 반바지 + 패딩 조합은 의도된 것으로 처리했다. 계절 충돌이 아니라
+> 한국 스트릿에서 흔한 레이어링이라 그대로 살렸다.
 
 ---
 
@@ -128,6 +145,23 @@ round black acetate glasses (Boston-style frames) at all times. Lean athletic bu
 170 cm and 65 kg: narrow shoulders, flat stomach, no bulk, long clean limbs.
 Calm neutral expression, quiet confidence, no exaggerated smiling.
 
+WARDROBE ANCHOR — the hero outfit, reproduce these garments exactly:
+- Top: an oversized white crew-neck T-shirt in heavy cotton, boxy cut with dropped
+  shoulder seams, worn untucked, the hem falling to the upper hip.
+- Bottom: wide-leg knee-length sweat shorts in heather marled light grey brushed
+  fleece. Very voluminous A-line cut, a sharp pressed centre crease running down the
+  front of each leg, an elastic waistband with a matching grey drawstring, and
+  slanted side pockets. The hem ends right at the knee.
+- Socks: plain white ribbed cotton crew socks pulled up to mid-calf.
+- Shoes: chunky retro "dad" runner sneakers in off-white cream leather, with pale
+  grey wavy overlay panels along the sides, white round laces, and a very tall
+  layered lugged midsole.
+- Outerwear (only in shots that call for it): a lightweight hooded down puffer
+  jacket in pale ice-grey silver, glossy ripstop nylon with a soft sheen, horizontal
+  quilted baffle channels across the body and sleeves, a full-length matching grey
+  front zip, an attached puffed hood with black lining visible at the opening, and
+  two zippered hand pockets. Slim and packable, not bulky.
+
 STYLE ANCHOR — keep identical in every shot:
 Seamless infinite white studio cyclorama, absolutely no props, furniture or visible
 walls, faint cool-grey falloff in the corners, one soft contact shadow pooling under
@@ -147,9 +181,10 @@ grain, no vignette, no lens flare. Vertical 9:16 e-commerce lookbook aesthetic.
 [SUBJECT ANCHOR] [STYLE ANCHOR]
 
 Full-body wide shot, head-to-toe with generous headroom. He stands centered, feet
-shoulder-width apart, arms relaxed at his sides, facing camera dead-on. He wears a
-plain white crew-neck T-shirt, washed charcoal wide-leg jeans and beige low-profile
-sneakers.
+shoulder-width apart, arms relaxed at his sides, facing camera dead-on, wearing the
+full hero outfit from the WARDROBE ANCHOR — oversized white tee, heather grey
+wide-leg knee-length sweat shorts, white crew socks, chunky cream sneakers. No
+jacket yet.
 
 Motion: he holds the pose almost perfectly still — one natural breath, one slow
 blink, a barely perceptible weight shift. The camera performs one extremely slow
@@ -173,12 +208,14 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 
 Full-body wide shot, identical framing and identical pose throughout.
 
-Beat 1 (0-3s): he wears a long untucked white T-shirt over low-rise straight jeans —
-the hem falls past his hips, visually shortening his legs.
+Beat 1 (0-3s): he wears a long baggy white T-shirt hanging past his hips over full-
+length loose grey sweatpants that puddle over flat low-profile sneakers — the leg
+line is swallowed and his height reads short.
 Beat 2 (3-8s): hard cut on the beat, a wardrobe teleport — the pose, framing and
-lighting stay EXACTLY the same, only the clothes change instantly. Now a cropped
-boxy white T-shirt tucked into high-waisted pleated wide-leg trousers, with beige
-sneakers.
+lighting stay EXACTLY the same, only the clothes change instantly. Now the hero
+outfit: the boxy oversized white tee ending at the upper hip, heather grey wide-leg
+sweat shorts cut off right at the knee, white ribbed crew socks and the chunky cream
+sneakers, so bare shin shows between hem and sock and the leg line reads longer.
 
 Motion: minimal. He stays planted, breathing naturally, a single blink per beat.
 
@@ -200,11 +237,12 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 
 Medium shot framing him from mid-thigh up, then holding.
 
-Beat 1 (0-4s): a tight slim-fit black knit that clings to his narrow frame and
-emphasises how slight his shoulders are.
-Beat 2 (4-8s): hard cut, wardrobe teleport with identical pose and framing — an
-oversized boxy charcoal sweatshirt with dropped shoulder seams and a wide body,
-instantly giving him breadth.
+Beat 1 (0-4s): a tight slim-fit white T-shirt that clings to his narrow frame and
+emphasises how slight his shoulders are, worn with the heather grey wide-leg shorts.
+Beat 2 (4-8s): hard cut, wardrobe teleport with identical pose and framing — the
+same grey shorts, but now the oversized white crew-neck tee from the WARDROBE
+ANCHOR, boxy with dropped shoulder seams and a wide body, instantly giving him
+breadth.
 
 Motion: he lifts his chin very slightly on the cut, then settles. Nothing else moves.
 
@@ -225,19 +263,22 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 
 Full-body wide shot, locked off, identical pose held throughout.
 
-He wears a white T-shirt and high-waisted wide-leg trousers as a base. An open
-overshirt layers on top and changes three times in rapid hard cuts on the beat —
-first washed indigo denim, then olive cotton twill, then a soft ecru linen — pose,
-framing and lighting perfectly unchanged between each swap.
+He wears the hero base — oversized white tee, heather grey wide-leg knee-length
+sweat shorts, white crew socks, chunky cream sneakers. On the beat, the pale
+ice-grey hooded down puffer jacket appears on him in a single frame: glossy ripstop
+nylon with a soft sheen, horizontal quilted baffle channels across body and sleeves,
+a full-length matching grey front zip worn open, an attached puffed hood with black
+lining visible at the opening, two zippered hand pockets, slim and packable rather
+than bulky. Pose, framing and lighting stay perfectly unchanged; every other garment
+is untouched. It zips up halfway on the next beat, then the hood goes up on the last.
 
-Motion: he keeps his hands loosely in his trouser pockets and stays still; only the
-garment swaps create movement.
+Motion: he keeps his hands loosely at his sides and stays still; only the jacket
+changes create movement.
 
-Graphics: a vertical stack of small square fabric swatch cards floats along the right
-edge of the frame, each labelled in tiny uppercase — "DENIM", "TWILL", "LINEN" — and
-a small white cursor arrow clicks each one in turn, a green check mark popping onto
-the swatch as its garment appears on him. Small tracked-out "HACK 3" above a large
-uppercase "LAYERING".
+Graphics: three small square swatch cards stack along the right edge of the frame,
+labelled in tiny uppercase — "OPEN", "ZIPPED", "HOOD UP" — and a small white cursor
+arrow clicks each in turn, a green check mark popping onto the card as the jacket
+changes on him. Small tracked-out "HACK 3" above a large uppercase "LAYERING".
 
 No text distortion, no watermark, no UI chrome, no phone interface.
 ```
@@ -249,12 +290,14 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 ```
 [SUBJECT ANCHOR] [STYLE ANCHOR]
 
-Beat 1 (0-4s): tight detail shot cropped from the knees down — high-waisted
-wide-leg trousers breaking over the shoes. Flat thin-soled black loafers first, then
-a hard cut to chunky white volume sneakers with a thick midsole, same trousers, same
-camera position, same floor shadow.
+Beat 1 (0-4s): tight detail shot cropped from the knees down — the heather grey
+fleece shorts hem at the knee, bare shins, white ribbed crew socks. Flat thin-soled
+canvas sneakers first, then a hard cut to the chunky cream "dad" runners with their
+tall layered lugged midsole and pale grey wavy side panels. Same shorts, same socks,
+same camera position, same floor shadow.
 Beat 2 (4-8s): hard cut to a tight head-and-shoulders close-up, eye-level, dead-on.
-He wears the thick round black acetate glasses. Very slow push-in.
+He wears the thick round black acetate glasses, with the grey puffer collar just
+visible at the bottom of frame. Very slow push-in.
 
 Motion: in the close-up he blinks once, then gives a small closed-mouth smile in the
 final second.
@@ -272,34 +315,15 @@ No text distortion, no watermark, no UI chrome, no phone interface.
 ### 단일 호출 버전 (15초, 빠른 검증용)
 
 세그먼트 5개가 부담스러우면 이거 하나로 톤부터 확인.
+앵커가 인라인으로 합쳐진 **복붙 가능한 완성본은 4-1 섹션**에 있다.
+구성은 아래와 같다.
 
-```
-[SUBJECT ANCHOR] [STYLE ANCHOR]
-
-A vertical 9:16 fashion styling tutorial reel, 15 seconds, cut on the beat.
-
-Shot 1 (0-4s): full-body wide shot, head to toe with generous headroom. He stands
-dead-on, arms relaxed, in a long untucked white T-shirt and low-rise straight jeans.
-Perfectly still — one breath, one blink.
-
-Shot 2 (4-8s): hard cut. A wardrobe teleport — identical pose, identical framing,
-identical lighting, only the clothes change instantly. Now a cropped boxy white tee
-tucked into high-waisted pleated wide-leg trousers with chunky white sneakers.
-
-Shot 3 (8-11s): hard cut to a detail shot from the knees down, the wide trousers
-breaking over the thick-soled sneakers, soft contact shadow on the white floor.
-
-Shot 4 (11-15s): hard cut to a tight head-and-shoulders close-up, eye-level,
-dead-on, thick round black glasses catching a small soft highlight. Extremely slow
-push-in. He blinks once and gives a small closed-mouth smile on the last beat.
-
-Graphics: minimal flat white-and-charcoal motion design — a thin black dashed
-horizontal guide at the waistline in shots 1 and 2, and one small white pill-shaped
-badge with a green check mark reading "HIGH WAIST" appearing on the cut into shot 2.
-
-No text distortion, no watermark, no UI chrome, no phone interface, no on-screen
-paragraphs of text.
-```
+| 컷 | 시간 | 내용 |
+|---|---|---|
+| 1 | 0-4s | 전신 풀샷. 히어로 착장(오버핏 화이트 티 + 그레이 와이드 반바지 + 화이트 양말 + 청키 스니커즈), 재킷 없음 |
+| 2 | 4-8s | 하드컷 워드로브 텔레포트. 포즈·프레이밍 그대로, **그레이 패딩만 위에 입혀짐** |
+| 3 | 8-11s | 무릎 아래 디테일컷. 반바지 밑단, 맨 정강이, 화이트 크루삭스, 청키 밑창 |
+| 4 | 11-15s | 얼굴 클로즈업. 아주 느린 푸시인, 마지막 비트에 옅은 미소 |
 
 ---
 
@@ -394,6 +418,16 @@ wears thick round black acetate glasses (Boston-style frames) in every shot. Lea
 build, 170 cm and 65 kg: narrow shoulders, flat stomach, no bulk, long clean limbs.
 Calm neutral expression, quiet confidence, no exaggerated smiling.
 
+His outfit, reproduced exactly in every shot: an oversized white crew-neck T-shirt
+in heavy cotton, boxy with dropped shoulder seams, worn untucked with the hem
+falling to the upper hip. Wide-leg knee-length sweat shorts in heather marled light
+grey brushed fleece — very voluminous A-line cut, a sharp pressed centre crease down
+the front of each leg, an elastic waistband with a matching grey drawstring, slanted
+side pockets, the hem ending right at the knee. Plain white ribbed cotton crew socks
+pulled up to mid-calf. Chunky retro "dad" runner sneakers in off-white cream
+leather, with pale grey wavy overlay panels along the sides, white round laces and a
+very tall layered lugged midsole.
+
 Setting and look, identical in every shot: a seamless infinite white studio
 cyclorama, absolutely no props, furniture or visible walls, a faint cool-grey
 falloff in the corners, and one soft contact shadow pooling under his shoes.
@@ -407,39 +441,49 @@ vignette, no lens flare. Vertical 9:16 e-commerce lookbook aesthetic.
 A 15-second fashion styling tutorial reel, cut hard on the beat.
 
 Shot 1 (0-4s): full-body wide shot, head to toe with generous headroom. He stands
-dead-on, arms relaxed at his sides, feet shoulder-width apart, in a long untucked
-white T-shirt and low-rise straight jeans with beige sneakers. He is almost
-perfectly still — one natural breath, one slow blink.
+dead-on, arms relaxed at his sides, feet shoulder-width apart, wearing the outfit
+above. He is almost perfectly still — one natural breath, one slow blink.
 
-Shot 2 (4-8s): hard cut, a wardrobe teleport — the pose, framing and lighting stay
-EXACTLY the same and only the clothes change instantly. Now a cropped boxy white
-T-shirt tucked into high-waisted pleated wide-leg trousers with chunky white
-sneakers.
+Shot 2 (4-8s): hard cut, a wardrobe teleport — the pose, framing, lighting and every
+other garment stay EXACTLY the same, and a jacket simply appears on him between one
+frame and the next. Over the white T-shirt he now wears a lightweight hooded down
+puffer jacket in pale ice-grey silver: glossy ripstop nylon with a soft sheen,
+horizontal quilted baffle channels across the body and sleeves, a full-length
+matching grey front zip worn open, an attached puffed hood with black lining visible
+at the opening, and two zippered hand pockets. Slim and packable, not bulky. The
+grey shorts, white socks and chunky cream sneakers are unchanged.
 
-Shot 3 (8-11s): hard cut to a detail shot framed from the knees down, the wide
-trousers breaking over the thick-soled sneakers, soft contact shadow on the white
-floor.
+Shot 3 (8-11s): hard cut to a detail shot framed from the knees down — the wide
+fleece shorts hem falling at the knee, bare shins, white ribbed crew socks, and the
+tall lugged midsoles of the cream sneakers planted on the white floor with a soft
+contact shadow.
 
 Shot 4 (11-15s): hard cut to a tight head-and-shoulders close-up, eye-level,
-dead-on, the thick round black glasses catching a small soft highlight. Extremely
-slow push-in. He blinks once and gives a small closed-mouth smile on the final beat.
+dead-on, the thick round black glasses catching a small soft highlight, the grey
+puffer collar just visible at the bottom of frame. Extremely slow push-in. He blinks
+once and gives a small closed-mouth smile on the final beat.
 
 Completely clean frame: no text, no captions, no badges, no logos, no watermark,
-no user interface elements of any kind.
+no brand marks on any garment, no user interface elements of any kind.
 ```
 
 ### 결과 확인 포인트
 
-이 15초로 판단할 것은 딱 네 가지.
+이 15초로 판단할 것은 다섯 가지.
 
 1. **얼굴이 사진과 같은 사람인가** — 특히 4번 샷 클로즈업
 2. **배경이 순백 무한대로 깔렸는가** — 사진 속 복도/강의실이 새어나오면 실패
-3. **2번 컷에서 포즈가 유지된 채 옷만 바뀌는가** — 워드로브 텔레포트가 이 영상의 핵심
-4. **조명이 하이키로 평탄한가** — 얼굴에 그림자가 지면 톤이 달라진다
+3. **2번 컷에서 포즈가 유지된 채 패딩만 입혀지는가** — 워드로브 텔레포트가 이 영상의 핵심
+4. **착장이 지정한 대로 나왔는가** — 반바지 밑단이 무릎에서 끊기는지, 스니커즈
+   밑창이 충분히 두꺼운지, 패딩이 가로 퀼팅인지
+5. **조명이 하이키로 평탄한가** — 얼굴에 그림자가 지면 톤이 달라진다
 
-1번이 흔들리면 → 레퍼런스 사진을 얼굴 위주로 더 타이트하게 크롭해서 재업로드.
-2번이 흔들리면 → 사진이 `start_image`로 들어갔을 가능성이 높다. role 확인.
-3번이 흔들리면 → 컷을 2개로 줄이고 duration을 10초로.
+| 실패 지점 | 대응 |
+|---|---|
+| 1번 | 레퍼런스 사진을 얼굴 위주로 더 타이트하게 크롭해서 재업로드 |
+| 2번 | 사진이 `start_image`로 들어갔을 가능성이 높다. role 확인 |
+| 3번 | 컷을 2개로 줄이고 duration을 10초로 |
+| 4번 | 해당 아이템 제품컷을 `image_references`에 **추가로** 올린다. 인물 사진과 섞여 얼굴이 흔들리면, 착장 전용으로 따로 한 번 더 돌려서 좋은 쪽을 채택 |
 
 ---
 
