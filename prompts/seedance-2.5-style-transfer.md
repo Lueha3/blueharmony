@@ -359,6 +359,90 @@ no user interface elements of any kind.
 
 ---
 
+## 4-1. 힉스필드 웹에서 직접 실행하기 (복붙용)
+
+### 순서
+
+1. **higgsfield.ai** 로그인 → 영상 생성(Video / Generate) 화면으로 이동
+2. **모델을 `Seedance 2.5`로 선택**
+   - 모델 목록에 Seedance 2.0 / 2.0 Mini도 같이 보인다. **2.5**를 골라야 함
+3. **레퍼런스 이미지 업로드** — 브라우저 UI를 잘라낸 사진 3장을 전부 올린다
+   - 역할(role)을 고르는 옵션이 있으면 **`image_references`** 로 지정
+   - `start_image`로 잡히면 안 된다. 그러면 사진 배경(복도·강의실)이 첫 프레임에 그대로 박힌다
+4. **모드를 `omni_reference`** 로 설정 (레퍼런스를 올리면 보통 자동 전환됨)
+5. 아래 설정값 입력 후 프롬프트 붙여넣기
+
+### 설정값
+
+| 항목 | 값 |
+|---|---|
+| Model | `Seedance 2.5` |
+| Mode | `omni_reference` |
+| Aspect ratio | `9:16` |
+| Duration | `15` |
+| Resolution | `720p` (2.5의 상한) |
+| Generate audio | **끄기** |
+
+### 프롬프트 (전체 복사)
+
+```
+A slim young Korean man in his early twenties, matching the reference photos
+exactly: fair skin with a warm undertone, clean-shaven, a slender oval face with a
+defined jawline, a straight nose and small full lips. Black two-block haircut —
+tapered short sides, a soft side-swept fringe, slight wave and volume on top. He
+wears thick round black acetate glasses (Boston-style frames) in every shot. Lean
+build, 170 cm and 65 kg: narrow shoulders, flat stomach, no bulk, long clean limbs.
+Calm neutral expression, quiet confidence, no exaggerated smiling.
+
+Setting and look, identical in every shot: a seamless infinite white studio
+cyclorama, absolutely no props, furniture or visible walls, a faint cool-grey
+falloff in the corners, and one soft contact shadow pooling under his shoes.
+High-key lighting — a large frontal softbox plus even fill, almost no shadow on the
+face, flat even skin, a small soft catchlight in each glasses lens. Locked-off
+tripod, eye-level, 50 mm lens, dead-on frontal framing, zero handheld shake. Bright
+neutral grade, low contrast, accurate white balance, a fully desaturated background
+so colour exists only in the clothing. Crisp digital sharpness, no film grain, no
+vignette, no lens flare. Vertical 9:16 e-commerce lookbook aesthetic.
+
+A 15-second fashion styling tutorial reel, cut hard on the beat.
+
+Shot 1 (0-4s): full-body wide shot, head to toe with generous headroom. He stands
+dead-on, arms relaxed at his sides, feet shoulder-width apart, in a long untucked
+white T-shirt and low-rise straight jeans with beige sneakers. He is almost
+perfectly still — one natural breath, one slow blink.
+
+Shot 2 (4-8s): hard cut, a wardrobe teleport — the pose, framing and lighting stay
+EXACTLY the same and only the clothes change instantly. Now a cropped boxy white
+T-shirt tucked into high-waisted pleated wide-leg trousers with chunky white
+sneakers.
+
+Shot 3 (8-11s): hard cut to a detail shot framed from the knees down, the wide
+trousers breaking over the thick-soled sneakers, soft contact shadow on the white
+floor.
+
+Shot 4 (11-15s): hard cut to a tight head-and-shoulders close-up, eye-level,
+dead-on, the thick round black glasses catching a small soft highlight. Extremely
+slow push-in. He blinks once and gives a small closed-mouth smile on the final beat.
+
+Completely clean frame: no text, no captions, no badges, no logos, no watermark,
+no user interface elements of any kind.
+```
+
+### 결과 확인 포인트
+
+이 15초로 판단할 것은 딱 네 가지.
+
+1. **얼굴이 사진과 같은 사람인가** — 특히 4번 샷 클로즈업
+2. **배경이 순백 무한대로 깔렸는가** — 사진 속 복도/강의실이 새어나오면 실패
+3. **2번 컷에서 포즈가 유지된 채 옷만 바뀌는가** — 워드로브 텔레포트가 이 영상의 핵심
+4. **조명이 하이키로 평탄한가** — 얼굴에 그림자가 지면 톤이 달라진다
+
+1번이 흔들리면 → 레퍼런스 사진을 얼굴 위주로 더 타이트하게 크롭해서 재업로드.
+2번이 흔들리면 → 사진이 `start_image`로 들어갔을 가능성이 높다. role 확인.
+3번이 흔들리면 → 컷을 2개로 줄이고 duration을 10초로.
+
+---
+
 ## 5. 확인 필요한 점
 
 1. **가로 스크린샷(옷장 배경 데님 셔츠 남성)의 용도**
