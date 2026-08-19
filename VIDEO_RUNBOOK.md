@@ -1,7 +1,19 @@
-# 스타일링 릴스 인물 교체 — 작업 러너북
+# 스타일링 릴스 — 작업 러너북
 
-옷장/테일러샵 스타일링 릴스에서 맨 왼쪽 인물을 교체하는 작업의 검증된 파이프라인.
 다음번엔 이 문서를 읽는 것만으로 탐색 단계 없이 바로 생성에 들어갈 것.
+
+## 포맷 2종
+
+| | **포맷 A — 테일러샵 3인** | **포맷 B — 스튜디오 2인** ⭐ 현재 주력 |
+|---|---|---|
+| 구성 | 진행자(노인 테일러) + 남녀 모델 | 진행자(인플루언서) + 남성 모델 1인 |
+| 배경 | 원목 매장 (복잡) | 무지 화이트 스튜디오 (단순) |
+| 자막 | 한글 하드섭 | 없음 |
+| 길이 | 42초 / 10벌 | 12초 / 4벌 |
+| 난이도 | 높음 (배경 환각, 자막 오타) | **낮음 (권장)** |
+| 상세 | §1~§6 | **§9** |
+
+포맷 B가 AI 복제 성공률·비용·속도 모두에서 유리함. 신규 작업은 §9부터 볼 것.
 
 ---
 
@@ -162,7 +174,129 @@ exactly as they appear (do not re-draw or re-type any text).
 ```
 VIDEO_RUNBOOK.md 기준으로 이어서 진행해줘.
 - §0의 media_id로 음성 클론부터 재개 (크레딧 충전 확인 후)
-- §4 프롬프트 + §1 표의 제스처로 Part1(1~5벌)/Part2(6~10벌) 얼굴 교체본 생성
+- §9 포맷 B 프롬프트로 생성 (수정 요청 6건 반영본)
 - §5의 2단계로 음성 교체
 - 변경사항: [있으면 여기에]
 ```
+
+---
+
+# 9. 포맷 B — 스튜디오 2인 (현재 주력)
+
+## 9.1 레퍼런스 원본 사양 (`0818.mp4`, 12.07초, 1080x1920, 60fps)
+
+- **카메라**: 완전 고정. t=0.1/6.0/11.9초 프레이밍 픽셀 동일. scene-cut 임계값 0.08까지 낮춰도 컷 0개 → 원테이크
+- **구도**: 풀샷, 아이레벨, 정면 대칭
+- **조명/색**: 무지 화이트~연그레이 배경, 스튜디오 소프트박스, 그림자 최소, 저채도 뉴트럴 팔레트
+- **자막**: 없음 / **BGM**: 없음 (육성 단독)
+- **대사 포맷**: `"[고정색]의 [변경색]은 [형용사]해 보이고"` × 4 + CTA
+- **템포**: 평균 2.35초/조합 (포맷 A는 4.2초/조합)
+
+## 9.2 수정 요청 6건 + 실측 데이터
+
+측정 스크립트: 배경이 near-white이므로 `pixel < 200`을 피사체로 마스킹해 bbox 산출.
+
+| # | 요청 | 실측 현황 | 목표 |
+|---|---|---|---|
+| 1 | 손이 색상을 지시(deictic)하도록 | 가슴 근처 모호한 제스처 | "네이비의"→네이비 상의 지시, "연청은"→연청 팬츠 지시. 단어에 동기화 |
+| 2 | 발끝 정렬 ⭐️⭐️⭐️ | **이미 정렬됨** (평균 1.6px, 최대 4px = 높이의 0.42%) | 현 수준 **유지**를 하드 제약으로 명시 |
+| 3 | 2명이 더 작게 | 피사체 높이 **82.4%** (평균), 발끝 y=95%, 머리 y=11% | **60~65%**, 발끝 y≈83%, 머리 y≈18% |
+| 4 | 살짝 각도 틀기 | 완전 정면 대칭 | 몸통 15~20° 3/4 앵글 |
+| 5 | 속도 살짝 down | **§9.3 참조 — 속도 문제 아님** | 문장 사이 0.3~0.4초 무음 삽입 |
+| 6 | 오른쪽 모델 움직임 최소화 | 프레임간 모션 평균 899 / 최대 6318 | 고개 끄덕임만 |
+
+**인스타 릴스 세이프존 (1080x1920)**: 하단 약 320px(캡션/계정명/오디오바), 우측 약 180px(액션버튼), 상단 약 130px.
+→ 현재 발끝 y=1829는 하단 UI에 **완전히 가려짐**. 발끝을 y≈1600 이하로 올려야 함.
+
+## 9.3 ⚠️ "속도" 관련 핵심 발견 (요청 5번)
+
+레퍼런스 실제 음성(`ref_voice.mp3` = voice_4)과 AI 내레이션의 **구간별 길이를 실측 비교**한 결과:
+
+| 문장 | 실제 목소리 | AI 버전 |
+|---|---|---|
+| 1 | 2.08s | 2.14s |
+| 2 | 1.88s | 2.00s |
+| 3 | 2.34s | 2.40s |
+| 4 | 2.54s | 2.40s |
+| CTA | 1.52s | 1.70s |
+| **합계** | **10.36s** | **10.64s** |
+
+**AI 쪽이 이미 3% 더 느림.** 즉 "훅훅 지나간다"는 체감은 발화 속도 때문이 아님. 원인은:
+1. 문장 사이 **호흡(무음)이 0초** — 실제 사람은 미세한 숨을 쉼
+2. **평탄한 프로소디**(피치 변화 없음) → "AI스러움"의 실체
+3. 시각적으로 2.35초마다 의상이 컷 없이 바뀜
+
+→ **발화 자체를 늦추면 안 됨** (늘어지고 더 로봇처럼 들림).
+→ 올바른 처방: **문장 사이 0.3~0.4초 무음 추가**(총 12.0~12.5초) + §5의 2단계 음성 교체로 프로소디 확보.
+
+## 9.4 포맷 B 생성 프롬프트
+
+```
+Vertical 9:16, 1080p, 30fps, ~13 seconds.
+
+CAMERA — ABSOLUTELY STATIC locked-off tripod. No zoom, no pan, no tilt, no
+dolly, no drift. Framing pixel-identical from first frame to last. One
+continuous take, NO cuts.
+
+FRAMING & SCALE — Full shot on a seamless plain off-white studio backdrop,
+soft flat e-commerce lighting, minimal shadow, no props.
+The two men are framed SMALL in the tall frame with generous headroom and
+floor space: their heads start at about 18% down from the top of the frame
+and their shoes end at about 83% down — they occupy roughly 60-65% of the
+frame height, NOT filling it. Leave clear empty margin above their heads and
+below their feet so nothing is hidden behind social-media UI overlays.
+Keep both men within the left 80% of the frame width.
+
+STANCE — Both stand on the SAME floor line at the SAME distance from the
+camera. THEIR SHOE TIPS ARE PERFECTLY ALIGNED ON ONE HORIZONTAL LINE — no
+one stands forward or back. Both bodies are turned about 15-20 degrees
+toward each other in a relaxed three-quarter angle — NOT square-on to the
+camera, NOT perfectly frontal.
+
+LEFT (presenter) — [인물 묘사: 레퍼런스 사진 기반]. He speaks to camera with
+a calm, warm expression and natural micro-movements (occasional blink,
+slight head tilt).
+HIS HAND POINTS DEICTICALLY, synced to the words: as he says the first color
+he points at that garment, and as he says the second color he moves his hand
+to point at that garment. One clear, deliberate pointing motion per color
+word. Five clearly separated, correctly shaped fingers. He never clasps or
+interlocks his hands.
+
+RIGHT (model) — Stands almost completely still, arms relaxed at his sides.
+His ONLY movement is a small, slow nod in response to what the presenter
+says. No shifting weight, no gesturing, no turning, no fidgeting — he must
+not pull attention away from the presenter.
+
+STYLING — Minimal Korean streetwear: wide-leg denim, oversized outerwear,
+clean sneakers or derby shoes. Low-saturation neutral palette (navy, ice-wash
+blue, charcoal, olive, cream). Clean high-resolution texture, no film grain,
+no 3D-render look.
+
+The right model's top changes on each beat as an invisible transition — no
+visible hard cut, background and presenter unchanged.
+
+NO on-screen captions, text, subtitles or watermarks.
+
+AUDIO — natural spoken Korean narration, no BGM. One line per color pairing
+in the format "[색A]의 [색B]은 [형용사]해 보이고", with a clear 0.3-0.4
+second SILENT PAUSE between lines so the speaker can breathe. Do NOT rush
+the lines together. End with a short CTA line.
+```
+
+**Negative prompt**
+```
+camera zoom, camera movement, drift, hard cut, subjects filling the frame,
+cropped feet, feet at frame bottom, misaligned feet, one person standing
+forward, square-on frontal pose, model moving, model gesturing, fidgeting,
+vague hand gesture, clasped hands, merged fingers, text, subtitles,
+watermark, letterbox, black bars, background clutter
+```
+
+## 9.5 포맷 B 음성 처리
+
+§5의 2단계 분리 원칙 그대로 적용:
+1. 영상은 위 프롬프트로 생성 (내레이션은 타이밍 확보용)
+2. `create_voice_from_confirmed_audio`로 클론 등록 (§0 media_id)
+3. `voice_change(video_id=<결과>, voice_id=<클론>, voice_type="element")`로 음색 교체
+
+"목소리가 너무 AI스럽다"는 피드백은 모델 내장 TTS의 한계이며, **voice_change 단계 없이는 해결되지 않음**. 크레딧 확보가 선행 조건.
